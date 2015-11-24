@@ -31,4 +31,16 @@ feature 'restaurants:' do
       expect(current_path).to eq '/restaurants'
     end
   end
+
+  context 'viewing restaurants' do
+
+  let!(:nandos){Restaurant.create(name:'Nandos')}
+
+    scenario 'lets a user view a restaurant' do
+     visit '/restaurants'
+     click_link 'Nandos'
+     expect(page).to have_content 'Nandos'
+     expect(current_path).to eq "/restaurants/#{nandos.id}"
+    end
+  end
 end
